@@ -1,0 +1,182 @@
+%% int-act.sty
+%%
+%% Style file for documents of the INT-ACT project (adapted from fracas.sty)
+%%
+%% History:
+%% 03/07/94 - MP, created
+%% 20th April, 00 - JC adapted to mpiro
+%% 4th Dec, 01 - CM adapted to magicster
+%% 16th  Nov 04, - OL adapted to Talk
+%% Wed Nov 17 14:38:29 2004 TB: various fixes
+%% Thu Jan 17 07: JA: adapted to i2home
+%% Fri May 19 SL: adapted to embeddia
+%% 11th Nov 24 SL: adapted to int-act
+%%   
+
+%%%%%%%%%%%%%%%%%%%%%
+% package description
+%%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{int-act}[2024/11/11 int-act style sheet v0.1]
+% packages and includes
+\input{istprog.sty}
+\RequirePackage{a4wide}	%% A4
+\usepackage{etoolbox}
+\usepackage{tocloft}
+\AtBeginDocument{\apptocmd{\thebibliography}{\csname phantomsection\endcsname\addcontentsline{toc}{section}{\bibname}}{}{}}
+% \input{a4wide.sty}
+\typeout{Document Style `int-act' <11th November, 2024>.}
+
+\def\deliv@checkmark{ x }
+\DeclareOption{checkmark}{\def\deliv@checkmark{$\underline{\checkmark}$}}
+%\ExecuteOptions{checkmark}
+\ProcessOptions
+
+%%%%%%%%%%%%%%%%%%%%
+% Project references
+%%%%%%%%%%%%%%%%%%%%
+
+\ProjectRefNo{101132719}
+\ProjectFP{Horizon Europe}
+\ProjectAcronym{INT-ACT}
+\ProjectFullTitle{Intangible cultural heritage, bridging the past, present, and future}
+\ProjectInstrument{RIA}
+\ProjectStartDuration{1st January  2024 / 36 Months}
+\Security{Public}
+
+
+% \partners{ 
+% \textbf{Deutches Forschungszentrum fur K\"{u}nstliche Intelligenz} & \textsc{DFKI}\\
+% }
+
+% \webAddress{http://www.i2home.org}
+% \principalContact{  The i2home Project Co-ordinator\\
+% Dr.\ Jan Alexandersson\\
+% Deutches Forschungszentrum fur K{\"u}nstliche Intelligenz GmbH\\
+% Intelligent User Interfaces Department\\
+% Stuhlsatzenhausweg 3\\
+% 66123 Saarbr\"{u}cken, Germany\\
+% janal@dfki.de \\
+% Phone +49 (681) 302-5347  -  Fax +49 (681) 302-5020
+% }
+
+
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{colortbl}
+\usepackage{geometry}
+\usepackage{wallpaper}
+\usepackage{acro}
+\usepackage[format=hang,font=small,labelfont=bf]{caption}
+\usepackage{sfmath}
+%\usepackage{apacite} %
+\usepackage[style=apa, backend=biber]{biblatex} 
+\addbibresource{template.bib} 
+
+\pagestyle{fancy}
+\usepackage{array}	% tabs
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{hhline}
+
+\definecolor{INT-ACTblack}{RGB}{0,0,0}
+\definecolor{INT-ACTorange}{RGB}{240,126,50}
+\definecolor{INT-ACTbrown}{RGB}{195,175,160}
+\definecolor{INT-ACTgray}{RGB}{80,80,80}
+\definecolor{INT-ACTblue}{RGB}{0,153,153}
+\definecolor{EUblue}{RGB}{35,62,144}
+\definecolor{INT-ACTfont}{RGB}{00,83,78}
+\definecolor{INT-ACTred}{RGB}{253,82,85}
+\definecolor{INT-ACTgray}{RGB}{127,127,127}
+\definecolor{INT-ACTlightgray}{RGB}{219,219,219}
+\definecolor{INT-ACTlightergray}{RGB}{237,237,237}
+
+
+\geometry{a4paper,top=3.6cm,left=2.55cm,right=2.5cm,bottom=3.2cm,headsep=1.5cm}
+\setlength{\parindent}{0pt}
+\usepackage[parfill]{parskip}
+
+%% title page
+%% 
+\input{istcover.sty}
+
+
+% toc design
+\def\settableofcontents{%
+  \renewcommand{\cftlottitlefont}{\color{INT-ACTorange}\Large\bfseries}
+  \renewcommand{\cftloftitlefont}{\color{INT-ACTorange}\Large\bfseries}
+\renewcommand{\cftsubsecfont}{}
+\renewcommand{\cftsecfont}{}
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\cftfigfont}{}
+\renewcommand{\cfttoctitlefont}{\color{INT-ACTorange}\Large\bfseries}
+\setlength{\cftbeforetoctitleskip}{0cm}
+\setlength{\cftaftertoctitleskip}{3mm}
+\setlength{\cftbeforelottitleskip}{0cm}
+\setlength{\cftafterlottitleskip}{3mm}
+\setlength{\cftbeforeloftitleskip}{0cm}
+\setlength{\cftafterloftitleskip}{3mm}
+\setlength{\cftbeforesecskip}{2mm}
+\setlength{\cftbeforesubsecskip}{2mm}
+\setlength{\cftsecindent}{0mm}
+\setlength{\cftsubsecindent}{4mm}
+\setlength{\cftsubsubsecindent}{8mm}
+\renewcommand{\cftsecpagefont}{}
+\renewcommand{\cftsecaftersnum}{.}
+%\renewcommand{\cftsecleader}{\bfseries\cftdotfill{\cftsecdotsep}}
+%\renewcommand{\cftsecdotsep}{0.3}
+%\renewcommand{\cftsubsecdotsep}{0.3}
+%\renewcommand{\cftsubsubsecdotsep}{0.3}
+\addtolength{\cftsecnumwidth}{-2mm}
+\addtolength{\cftsubsecnumwidth}{-3mm}
+\addtolength{\cftsubsubsecnumwidth}{-5mm}
+\cftsetpnumwidth{2mm}
+}
+
+\logo{\includegraphics[scale=0.465]{graphics/int-actlogo}}
+
+\newcommand{\ignore}[1]{}
+
+% subsubsections processing
+\setcounter{secnumdepth}{3}	% numbering until subsubsections
+\setcounter{tocdepth}{3}	% toc depth
+
+\setcounter{topnumber}{20}
+\renewcommand{\topfraction}{.99}
+
+\setcounter{bottomnumber}{20}
+\renewcommand{\bottomfraction}{.99}
+
+\setcounter{totalnumber}{30}
+
+\renewcommand{\textfraction}{0}
+\renewcommand{\floatpagefraction}{0}
+
+% font
+% \usepackage[scaled]{uarial}
+% \usepackage[scaled]{helvet}
+\renewcommand*\rmdefault{phv}
+\renewcommand*\sfdefault{phv}
+\renewcommand*{\familydefault}{\rmdefault}
+\usepackage[T1]{fontenc}
+
+
+% sections as chapters
+\renewcommand*\thesection{\arabic{section}}
+
+\makeatletter
+    \def\thebibliography#1{\section*{References\@mkboth
+      {REFERENCES}{REFERENCES}}\list
+      {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+	\advance\leftmargin\labelsep
+	\usecounter{enumi}}
+	\def\newblock{\hskip .11em plus .33em minus .07em}
+	\sloppy\clubpenalty4000\widowpenalty4000
+	\sfcode`\.=1000\relax}
+    \makeatother
+    
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "template.tex"
+%%% End: 

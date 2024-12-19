@@ -1,0 +1,58 @@
+(TeX-add-style-hook
+ "istprog"
+ (lambda ()
+   (TeX-run-style-hooks
+    "lastpage"
+    "fancyhdr"
+    "stringstrings"
+    "ifthen"
+    "amssymb")
+   (TeX-add-symbols
+    '("istTestDisseminationLevel" 1)
+    '("istChange" 4)
+    "maketoc"
+    "GetDeliverableID"
+    "istpis"
+    "istdis"
+    "istmakechangelog"
+    "writechlog"
+    "arraystretch"
+    "noexpand"
+    "shadeofgray"
+    "ProjectRefNo"
+    "ProjectFP"
+    "ProjectAcronym"
+    "ProjectFullTitle"
+    "ProjectInstrument"
+    "ProjectStartDuration"
+    "Security"
+    "ContractualDate"
+    "ActualDate"
+    "delivNumber"
+    "delivName"
+    "delivShortTile"
+    "delivType"
+    "delivStatus"
+    "temparg"
+    "delivVersion"
+    "NumberOfPages"
+    "delivMonth"
+    "delivYear"
+    "delivDissLevel"
+    "delivWP"
+    "delivTask"
+    "delivResponsible"
+    "delivOtherContributors"
+    "delivAuthor"
+    "delivReviewer"
+    "delivFPAuthor"
+    "delivProjectOfficer"
+    "delivKeywords"
+    "delivAbstract"
+    "delivExecSummary"
+    "partners"
+    "webAddress"
+    "principalContact"
+    "logo"))
+ :latex)
+

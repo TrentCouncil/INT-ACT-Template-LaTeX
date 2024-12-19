@@ -1,0 +1,172 @@
+%% istcover.sty
+%%
+%% Cover page for INT-ACT deliverables (adapted from TALK, FRACAS and TRINDI)
+%%
+
+%%
+%%			History:
+%%			03/21/94 - MP, created (from urcstitlepage.sty and
+%%					   DYANA titlepage)
+%%			03/27/94 - MP, added ftp directory and email address
+%%			03/28/94 - RC, added HCRC
+%%			20 April 98 -- RC, adapted to TRINDI
+%%			30 APRIL 98 -- RC, adapted distribution data
+%%			Thu Feb 24 17:54:25 2000 JC adapted to M-PIRO
+%%			Wed Apr	 5 16:51:40 2000 JC generalized for IST
+%%			Tue Dec	 4 10:22:54 2001 CM changed copyright date
+%%			Tue Nov 16 2004 OL changed copyright date, logos, etc for TALK
+%%			Wed Nov 17 14:36:44 2004 TB added empty pagestyle for overflow page
+%%										(deliverable identification sheet)
+%%			2024/11/11 Adaptations for INT-ACT 
+%% $Id: istcover.sty,v 1.2 2007/01/05 12:05:33 olemon Exp $
+
+%%
+%% makefront
+%% Frontpage content
+%%
+
+\usepackage[raggedrightboxes]{ragged2e}
+
+
+\def\makefront{
+  \newpage
+  \newgeometry{a4paper,top=8.5mm,left=8.5mm,right=15mm,bottom=14mm}
+  % shadowed frame
+  %\ThisCenterWallPaper{1}{graphics/embeddiacoverbkg}
+  %	\global\@topnum\z@ % prevents figures from going at top of page
+  \thispagestyle{empty} % so we get no page number on title page
+  \setcounter{footnote}{0}
+  
+  \begingroup
+  % \renewcommand{\shadowsize}{2pt}
+  % \renewcommand{\shadowsize}{1pt}
+  % \shadowbox{%
+  % \begin{minipage}{\textwidth}
+  % redefine \@makefnmark so footnote marks take zero space
+  % (this make centering look better)
+  \def\thefootnote{\fnsymbol{footnote}}
+  \def\@makefnmark{\hbox to 0pt{$^{\@thefnmark}$\hss}}
+  \null
+  
+  % Titles block
+   % Titles block
+  \vspace*{24mm}
+\hspace*{12mm}
+\begin{minipage}{.85\linewidth}
+    \begin{minipage}{.27\linewidth}
+        \includegraphics[scale=0.865]{graphics/int-actlogo} 
+    \end{minipage}
+    \begin{minipage}{.85\linewidth}
+        \fontsize{21}{26}\color{black}\selectfont 
+        INTANGIBLE CULTURAL HERITAGE,\\[.3ex]
+        BRIDGING THE PAST, PRESENT, \\[.3ex]
+        AND FUTURE                                                  
+    \end{minipage}
+    \\[9ex]
+    \begin{minipage}{.90\linewidth}
+        \justify
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}[t]{rl}
+            \fontsize{16}{20}\color{INT-ACTorange}\bf\selectfont
+            \deliv@number & 
+            \fontsize{16}{20}\color{INT-ACTorange}\bf\selectfont
+            \deliv@name \\[6ex]
+
+            \fontsize{11}{14}\color{INT-ACTorange}\selectfont
+            EDITOR(S): & 
+            \begin{minipage}[t]{0.95\textwidth} 
+                \setstretch{1.1}
+                \fontsize{11}{13} \color{INT-ACTblack} \selectfont
+                \justify \vspace*{-1.5ex} \deliv@authors
+            \end{minipage} \\[4ex]
+
+            \fontsize{11}{14}\color{INT-ACTorange}\selectfont
+            CONTRIBUTOR(S): & 
+            \begin{minipage}[t]{0.95\textwidth} 
+                \setstretch{1.1}
+                \fontsize{11}{13} \color{INT-ACTblack} \selectfont
+                \justify \vspace*{-1.5ex} \deliv@others
+            \end{minipage} \\[4ex]
+
+            \fontsize{11}{14}\color{INT-ACTorange}\selectfont
+            REVIEWER(S): & 
+            \begin{minipage}[t]{0.95\textwidth} 
+                \setstretch{1.1}
+                \fontsize{11}{13} \color{INT-ACTblack} \selectfont
+                \justify \vspace*{-1.5ex} \deliv@reviewers
+            \end{minipage} \\[8ex]
+
+            \fontsize{11}{14}\color{INT-ACTorange}\selectfont
+            ABSTRACT: & 
+            \begin{minipage}[t]{0.95\textwidth} 
+                \setstretch{1.1}
+                \fontsize{11}{13} \color{INT-ACTblack} \selectfont
+                \justify \vspace*{-1.5ex} \deliv@abstract
+            \end{minipage} \\
+        \end{tabular}
+    \end{minipage}
+\end{minipage}\\
+\vfill
+\hspace*{1cm}\begin{tabular}[b]{ll}
+    \includegraphics[width=.07\linewidth]{graphics/EUFlag}~\raisebox{1ex}{\parbox{.15\linewidth}{\fontsize{8}{8}\bf\color{EUblue}\selectfont
+    Funded by\newline the European Union}} & \raisebox{1ex}{\parbox{.64\linewidth}{
+    \fontsize{11}{10}\color{black}\selectfont
+    This project has received funding from the European Union's Horizon
+    Europe research and innovation programme under grant agreement
+    No. 101132719.}}
+\end{tabular}
+
+
+
+
+
+  
+  \endgroup
+
+  \clearpage
+  \restoregeometry
+  % reset footnote counter
+  \setcounter{footnote}{0}
+  % clean up title page macros
+  % Not yet!
+  % \let\maketitle\relax
+  % \gdef\@thanks{}\gdef\@author{}\gdef\@title{}
+  % \gdef\@funding{}\gdef\@techrepdept{}\gdef\@techrepname{}\gdef\@techrepnum{}
+  % \let\thanks\relax
+
+  % margins
+}
+%end of makefront
+
+
+%%
+%% \makeback
+%% Back page of the cover
+%% 
+\def\makeback{
+  \newpage
+  \istpis
+  \newpage
+  \istdis	  %%%%% see istprog.sty
+  \istmakechangelog
+}
+
+%%
+%% \makecover
+%% cover page (front + back)
+%%
+\def\makecover{
+	\makefront
+	\makeback
+}
+
+\newcommand\Thickvrule[1]{%
+	\multicolumn{1}{!{\vrule width 2pt}c!{\vrule width 1pt}}{#1}%
+}
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "template.tex"
+%%% End: 

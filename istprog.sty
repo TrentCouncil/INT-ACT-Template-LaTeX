@@ -1,0 +1,383 @@
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+%\usepackage{xstring}
+\usepackage{stringstrings}
+\usepackage{ifthen}
+\usepackage{amssymb}
+%% $Id: istprog.sty,v 1.1 2006/10/17 11:13:53 poller Exp $
+%%			History:
+%%			Tue Dec  4 10:26:29 2001:  CM tweaked to stop tables messing up
+%%			Tue Dec  4 10:35:09 2001:  CM hacked again to fix page height
+%%			Tue Nov  16         2004:  OL various changes for TALK
+%%			Wed Nov 17 15:05:09 2004:  TB more changes for TALK
+%%			2014/01/10 Adaptations for Metalogue
+%%			2019/05/31 Adaptations for Embeddia
+
+
+% table of content alias
+\newcommand{\maketoc}{
+	\thispagestyle{empty}\pagenumbering{roman}\tableofcontents\newpage\pagenumbering{arabic}
+}
+
+% redefine elements styles
+\@ifclassloaded{report}{
+	\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+          {-3.5ex \@plus -1ex \@minus -.2ex}%
+          {2.3ex \@plus.2ex}%
+          {\normalfont\fontsize{17}{22}\sffamily\bfseries\color{INT-ACTorange}}%
+	}
+
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+	          {-3.5ex \@plus -1ex \@minus -.2ex}%
+                  {2.3ex \@plus.2ex}
+		{\normalfont\fontsize{14}{18}\sffamily\bfseries\color{INT-ACTorange}}}
+
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+	          {-3.5ex \@plus -1ex \@minus -.2ex}%
+                  {2.3ex \@plus.2ex}
+		{\normalfont\fontsize{12}{16}\sffamily\bfseries\color{INT-ACTorange}}}
+
+% \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
+             % {3.25ex \@plus1ex \ at minus.2ex}%
+             % {-1em}%
+             % {\normalfont\normalsize\sffamily\bfseries}}
+}
+
+%%% Deliverable information sheet.
+
+\newcommand{\GetDeliverableID}{%
+\capitalizewords[e]{\deliv@stitle}
+\alphabetic[e]{\thestring}
+\edef\deliv@captitle{\thestring}
+\testmatchingchar{\deliv@status}{1}{d}
+INT-ACT-\convertchar{\deliv@number}{.}{}-\noblanks{\deliv@captitle}-\convertchar{\deliv@task}{.}{}-\deliv@status\ifmatchingchar{-\deliv@version}\else{}\fi
+%\IfBeginWith{\deliv@status}{d}{-\deliv@version}{}
+}
+% istpis project refs
+\newcommand{\istpis}{
+  {\color{INT-ACTorange}\fontsize{12}{15}\bf\selectfont Project Information}\\[.6ex] 
+  \setlength{\parindent}{0pt}
+  \def\arraystretch{0.9}
+  {\fontsize{9}{12}
+    \newcolumntype{a}{>{\columncolor{INT-ACTorange}}p{.25\linewidth}}
+  \begin{tabular}{!{\color{INT-ACTorange}\vrule}a!{\color{INT-ACTorange}\vrule}p{.693\linewidth}!{\color{INT-ACTorange}\vrule}}
+    \arrayrulecolor{INT-ACTorange}\hline
+    \color{white} Grant agreement No. & \color{black} \proj@ref@no
+    \\[3ex] \hhline{~-}
+    \color{white}
+    Project acronym & \color{black} \proj@acronym  \\[3ex] \hhline{~-}    
+    \color{white}
+    Project title & \color{black} Intangible Cultural Heritage, Bridging the Past, Present, and Future
+    \\[3ex] \hhline{~-}
+    \color{white}
+    Call & \color{black}  HORIZON-CL2-2023-HERITAGE-01   \\[3ex] \hhline{~-}
+    \color{white}
+    Topic & \color{black}HORIZON-CL2-2023-HERITAGE-01-04
+    \\[3ex] \hhline{~-}
+    \color{white}
+    Start date & \color{black} 01 Jan 2024 \\[3ex] \hhline{~-}
+     \color{white}
+    Duration & \color{black} 36 Months \\[3ex] 
+                  \arrayrulecolor{INT-ACTorange}\hline
+  \end{tabular}
+}\\[3ex]
+
+{\color{INT-ACTorange}\fontsize{12}{15}\bf\selectfont Project Consortium}\\[.7ex] 
+  \setlength{\parindent}{0pt}
+  \def\arraystretch{1.5}
+  {\fontsize{9}{12}
+    \newcolumntype{a}{>{\columncolor{INT-ACTorange}}p{.25\linewidth}}
+  \begin{tabular}{!{\color{INT-ACTorange}\vrule}c!{\color{INT-ACTorange}\vrule}l!{\color{INT-ACTorange}\vrule}l!{\color{INT-ACTorange}\vrule}c!{\color{INT-ACTorange}\vrule}}
+    \arrayrulecolor{INT-ACTorange}\hline
+    \multicolumn{1}{c!{\color{white}\vline}}{\cellcolor{INT-ACTorange}\color{white}\raisebox{-1.2ex}{Partner No.}} 
+    &\multicolumn{1}{l!{\color{white}\vline}}{\cellcolor{INT-ACTorange}\color{white}\raisebox{-1.2ex}{Short name}}
+    & \multicolumn{1}{l!{\color{white}\vline}}{\cellcolor{INT-ACTorange}\color{white}\raisebox{-1.2ex}{\parbox{.57\textwidth}{Legal name}}}
+    & \multicolumn{1}{l}{\cellcolor{INT-ACTorange}\color{white}\raisebox{-1.2ex}{Country}}
+    \\[2ex]
+    1 & AALTO & AALTO KORKEAKOULUSAATIO SR &FI\\\hline
+    2 & EVORA & UNIVERSIDADE DE \'EVORA & PT\\\hline
+    3 &ITML & \raisebox{-.4ex}{\parbox{.57\textwidth}{INFORMATION TECHNOLOGY FOR MARKET\newline LEADERSHIP}} & EL\\[1.4ex]\hline
+    4 & URBASOFIA & URBASOFIA SRL & RO\\\hline
+    %5& ARILYN & ARILYN OY & FI\\\hline
+    6 & KAVALA & DIMOS KAVALAS & EL\\\hline
+    7 & EDIN & THE UNIVERSITY OF EDINBURGH & UK\\
+    \arrayrulecolor{INT-ACTorange}\hline
+  \end{tabular}
+}\\[5ex]
+\begin{center}
+  \includegraphics[width=.12\linewidth]{graphics/aaltologo}\hspace{.2\textwidth}
+\parbox[b]{.2\linewidth}{\centering\includegraphics[width=.3\linewidth]{graphics/evoralogo}\\[1ex]
+\fontsize{6}{8}\selectfont UNIVERSIDADE DE \'EVORA}\hspace{.2\textwidth}
+\includegraphics[width=.13\linewidth]{graphics/itmllogo}\\[4ex]
+\includegraphics[width=.1\linewidth]{graphics/urbasofialogo}\hspace{.26\textwidth}
+\includegraphics[width=.12\linewidth]{graphics/kavalalogo}\hspace{.24\textwidth}
+\includegraphics[width=.12\linewidth]{graphics/UoEcrest}\\
+\end{center}
+}%% end istpis
+
+% istdis project refs
+\newcommand{\istdis}{
+  {\color{INT-ACTorange}\fontsize{12}{15}\bf\selectfont Deliverable Information}\\[1.5ex] 
+  \setlength{\parindent}{0pt}
+  \def\arraystretch{0.9}
+  {\fontsize{9}{12}
+    \newcolumntype{a}{>{\columncolor{INT-ACTorange}}p{.25\linewidth}}
+  \begin{tabular}[t]{!{\color{INT-ACTorange}\vrule}a!{\color{INT-ACTorange}\vrule}p{.693\linewidth}!{\color{INT-ACTorange}\vrule}}
+    \arrayrulecolor{INT-ACTorange}\hline
+    \color{white}
+    Deliverable & \color{black}\parbox{\linewidth}{\deliv@name}
+    \\\hhline{~-}
+    \color{white}
+    Deliverable No. & \color{black} \deliv@number
+    \\\hhline{~-}
+    %%\color{white}
+    %%Document identifier: & \color{black}\bf \GetDeliverableID{}
+    %%\\\hhline{~-}
+     \color{white} 
+    Task  & \color{black} \deliv@task\  \\\hhline{~-}
+     \color{white} 
+    Task No.  & \color{black} \deliv@tasktitle\  \\\hhline{~-}
+     \color{white} 
+    Task leader & \color{black}\deliv@owner  \\\hhline{~-}
+     \color{white} 
+    Task contributors &
+                        \color{black}\parbox{\linewidth}{\deliv@authors\ \deliv@others}  \\\hhline{~-}
+     \color{white} 
+    Task duration & \color{black}\deliv@taskduration  \\\hhline{~-}
+    \color{white} 
+    Deliverable due date & \color{black}\bf \deliv@actdate  \\\hhline{~-}
+     \color{white} 
+    Dissemination level & \color{black}\bf \deliv@disslevel  \\\hhline{~-}
+%     \color{white} 
+%    Nature:  & \color{black}\bf \deliv@type  \\\hhline{~-}
+%     \color{white} 
+%    Lead author(s): & \color{black}\bf \deliv@authors  \\\hhline{~-}
+%     \color{white} 
+%    Co-author(s):& \color{black}\bf \deliv@FPauthors  \\\hhline{~-}
+%     \color{white} 
+%    Status: & \color{black}\bf \deliv@status@table  \\\arrayrulecolor{INT-ACTgray}\hhline{~-}
+     \color{white} 
+    Version & \color{black}\bf \deliv@version  \\\hline
+  \end{tabular}
+}\\[3ex]
+}
+
+
+
+\newcommand{\istmakechangelog} {%
+  \InputIfFileExists {\jobname.chl}{}{%
+    \ClassWarning{h2020proposal}{Change log not complete yet. Recompile to include all data.}}%
+}%
+
+\newcommand{\writechlog}{
+  % create chlog table on auxiliary lwp file
+  \setcounter{@row}{0} \newwrite\chlogfile
+  \immediate\openout\chlogfile=\jobname.chl
+  \immediate\write\chlogfile{%
+  {\noexpand\fontsize{12}{15}\noexpand\color{INT-ACTorange}\noexpand\bf Document history}\noexpand\\[1ex] 
+  \noexpand\setlength{\noexpand\parindent}{0pt}
+  \noexpand\def\noexpand\arraystretch{1}
+  \noexpand\arrayrulecolor{INT-ACTorange}
+  \noexpand\def\noexpand\clinecolor{INT-ACTorange}
+  \noexpand\fontsize{9}{12}
+  \noexpand\begin{tabular}[t]{!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}p{.12\noexpand\linewidth}!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}p{.11\noexpand\linewidth}!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}p{.27\noexpand\linewidth}!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}p{.385\noexpand\linewidth}!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}}
+  \noexpand\arrayrulecolor{INT-ACTorange}\noexpand\hline
+             \noexpand\rowcolor{INT-ACTorange}
+             \noexpand\multicolumn{1}{l!{\noexpand\color{white}\noexpand\vline}}{\noexpand\cellcolor{INT-ACTorange}
+             \noexpand\color{white}
+             \noexpand\raisebox{-1.2ex}{Version No.}} &
+             \noexpand\multicolumn{1}{l!{\noexpand\color{white}\noexpand\vline}}{\noexpand\cellcolor{INT-ACTorange}
+             \noexpand\color{white}
+             \noexpand\raisebox{-1.2ex}{Date}} &
+\noexpand\multicolumn{1}{l!{\noexpand\color{white}\noexpand\vline}}{\noexpand\cellcolor{INT-ACTorange}
+             \noexpand\color{white}
+             \noexpand\raisebox{-1.2ex}{Contributors}} &
+\noexpand\multicolumn{1}{l!{\noexpand\color{INT-ACTorange}\noexpand\vline}}{\noexpand\cellcolor{INT-ACTorange}
+             \noexpand\color{white}
+             \noexpand\raisebox{-1.2ex}{Notes}
+                                                 \noexpand\color{INT-ACTorange}}\noexpand\\[1ex] \noexpand\hline}
+  \whiledo{\value{@row}<\value{@changecount}}{%
+             \stepcounter{@row}
+             \ifodd\value{@row}\def\shadeofgray{white}\else\def\shadeofgray{white}\fi
+             \immediate\write\chlogfile{%
+             \noexpand\small\csname @changeversion\arabic{@row}\endcsname &
+             \noexpand\small\csname @changedate\arabic{@row}\endcsname &                        
+             \noexpand\small\csname @changeauthor\arabic{@row}\endcsname &
+             \noexpand\small\csname @changesummary\arabic{@row}\endcsname \noexpand\\\noexpand\arrayrulecolor{INT-ACTorange}\noexpand\hline
+             }
+   }
+ \immediate\write\chlogfile{  \noexpand\arrayrulecolor{INT-ACTorange}\noexpand\hline\noexpand\end{tabular}}
+ \closeout\chlogfile
+}
+%\multicolumn{1}{l!{\color{white}\vline}}{\cellcolor{INT-ACTorange}\color{white}
+\AtEndDocument{%
+ \writechlog 
+  }
+
+  
+\def\ProjectRefNo#1{\gdef\proj@ref@no{#1}}
+\def\ProjectFP#1{\gdef\proj@fp{#1}}
+\def\ProjectAcronym#1{\gdef\proj@acronym{#1}}
+\def\ProjectFullTitle#1{\gdef\proj@title{#1}}
+\def\ProjectInstrument#1{\gdef\proj@instrument{#1}}
+\def\ProjectStartDuration#1{\gdef\proj@start@duration{#1}}
+\def\Security#1{\gdef\deliv@security{#1}}
+\def\ContractualDate#1{\gdef\deliv@contrdate{#1}}
+\def\ActualDate#1{\gdef\deliv@actdate{#1}}
+\def\delivNumber#1{\gdef\deliv@number{#1}}
+\def\delivName#1{\gdef\deliv@name{#1}}
+\def\delivShortTile#1{\gdef\deliv@stitle{#1}}
+\def\delivType#1{\gdef\deliv@type{#1}}
+\def\delivStatus#1{%
+  %\StrLeft{#1}{1}[\firstchar]%
+  %\edef\temparg{\firstchar}%
+  \substring[e]{#1}{1}{2}
+  \def\temparg{\thestring}%
+  \edef\tempf{\detokenize{f}}% final
+  \edef\temps{\detokenize{s}}% submitted
+  \if\temparg\tempf%
+  {\gdef\deliv@status{final}%
+    \gdef\deliv@status@table{\underline{~~~} draft, \underline{\deliv@checkmark} final, \underline{~~~} submitted (tick one)}}
+  \else %
+    \if\temparg\temps%
+     {\gdef\deliv@status{submitted}%
+       \gdef\deliv@status@table{\underline{~~~} draft, \underline{~~~} final, \underline{\deliv@checkmark} submitted (tick one)}}
+     \else
+     {\gdef\deliv@status{draft}%
+       \gdef\deliv@status@table{\underline{\deliv@checkmark} draft, \underline{~~~} final, \underline{~~~} submitted (tick one)}}
+     \fi
+  \fi%
+  % \ifthenelse{\equal{#1}{f}}%\or\equal{\lowercase{#1}}{\string final}}%
+  % {\gdef\deliv@status{final}%
+  %  \gdef\deliv@status@table{\_ draft, $\underline{\checkmark}$ final, \_ submitted (tick one)}}%
+  %  {\gdef\deliv@status{\lowercase{#1}}%
+  %   \gdef\deliv@status@table{$\underline{\checkmark}$ draft, \_ final, \_ submitted (tick one)}}%
+}
+\def\delivVersion#1{\gdef\deliv@version{#1}}
+\def\NumberOfPages#1{\gdef\deliv@pages{#1}}
+\def\delivMonth#1{\gdef\deliv@month{#1}}
+\def\delivYear#1{\gdef\deliv@year{#1}}
+\def\delivDissLevel#1{\gdef\deliv@disslevel{#1}}
+\def\delivWP#1{\gdef\deliv@wp{#1}}
+\def\delivTask#1{\gdef\deliv@task{#1}}
+\def\delivTaskTitle#1{\gdef\deliv@tasktitle{#1}}
+\def\delivTaskDuration#1{\gdef\deliv@taskduration{#1}}
+\def\delivResponsible#1{\gdef\deliv@owner{#1}}
+\def\delivOtherContributors#1{\gdef\deliv@others{#1}}
+\def\delivAuthor#1{\gdef\deliv@authors{#1}\author{#1}}
+\def\delivReviewer#1{\gdef\deliv@reviewers{#1}}
+\def\delivFPAuthor#1{\gdef\deliv@FPauthors{#1}\author{#1}}
+\def\delivProjectOfficer#1{\gdef\deliv@officer{#1}}
+\def\delivKeywords#1{\gdef\deliv@keywords{#1}}
+\def\delivAbstract#1{\gdef\deliv@abstract{#1}}
+\def\delivExecSummary#1{\gdef\deliv@abstract{#1}}
+\def\delivExecSummary#1{\gdef\deliv@abstract{#1}}
+
+
+\newcounter{@changecount}
+\setcounter{@changecount}{0}
+\newcounter{@row}
+\newcommand{\istChange}[4]{
+  \stepcounter{@changecount}%
+  \expandafter\xdef\csname%
+  @changedate\arabic{@changecount}\endcsname{#1}
+  \expandafter\xdef\csname%
+  @changeversion\arabic{@changecount}\endcsname{#2}
+  \expandafter\xdef\csname%
+  @changeauthor\arabic{@changecount}\endcsname{\detokenize{#3}}
+  \expandafter\xdef\csname%
+  @changesummary\arabic{@changecount}\endcsname{\detokenize{#4}}
+}
+
+%%% Headers and footers
+\renewcommand{\headrulewidth}{0pt}
+%\lhead{ICT-29-2018}
+\lhead{}
+\chead{\vspace{-4ex}
+  \begin{tabular}{@{}p{\textwidth}r@{}}
+    %\hline
+    \color{INT-ACTorange}\deliv@number: \deliv@stitle & \color{INT-ACTorange}\thepage{}\\
+  \end{tabular}
+  }
+\rhead{}
+%\rhead{\includegraphics[width=.07\linewidth]{graphics/intactlogo}}
+\lfoot{}
+\cfoot{
+\begin{tabular}[b]{lp{.7\textwidth}r}
+  \includegraphics[width=.05\linewidth]{graphics/EUFlag}~\raisebox{1ex}{\parbox{.15\linewidth}{\fontsize{6}{6}\bf\color{EUblue}\selectfont
+  Funded by\newline the European Union}}& &
+                                          \includegraphics[width=.05\linewidth]{graphics/int-actlogo}
+                 \\
+ \end{tabular}
+     }
+\rfoot{}
+
+% Some reasonable defaults. 
+
+\Security{??}
+\ContractualDate{}
+\ActualDate{\today{}}
+\delivNumber{Dn.n}
+\delivName{??}
+\delivType{??}
+
+\delivWP{??}
+\delivResponsible{??}
+\delivOtherContributors{??}
+\delivAuthor{??}
+\delivProjectOfficer{??}
+\delivKeywords{??}
+\delivAbstract{??}
+
+\ProjectRefNo{101132719}
+\ProjectAcronym{INT-ACT}
+\ProjectFullTitle{Intangible Cultural Heritage, Bridging the Past, Present, and Future}
+\Security{Restricted}
+\ContractualDate{\_\_\_\_ \_\_\_\_\_ 201\_}
+\delivMonth{Month}
+\delivYear{201x}
+\ActualDate{\_\_\_\_\_\_ 201\_}
+\delivNumber{Dn.n}
+\delivName{[Title as appears in the DOW]}
+\delivShortTile{Report Short Title Here}
+\delivDissLevel{PP}
+\delivType{[Report, Prototype, Other]}
+\delivStatus{d}
+\delivWP{WPx.x} % Workpackage x
+\delivResponsible{[Responsible partner]} 
+\delivOtherContributors{[List of partners contributed to the deliverable]} 
+\delivVersion{\today}
+\delivAuthor{[List of individuals contributed to the deliverable]}
+\delivFPAuthor{...}
+
+\delivOtherContributors{All partners}
+\delivProjectOfficer{Project officer}
+
+\delivKeywords{[List of free keywords relevant to the deliverable]}
+
+\delivDissLevel{CO}
+\delivTask{Tn.n}
+\delivTaskTitle{Title of the task according to DOW}
+\delivTaskTitle{Task duration (e.g. Months 1-36)}
+\delivVersion{0.0}
+\NumberOfPages{\pageref{LastPage(excluding front matter)}}
+
+\newcommand{\istTestDisseminationLevel}[1]{%
+  \ifthenelse{\equal{\deliv@disslevel}{#1}}
+  {#1}
+  {--}
+}
+
+%% Stuff for other than in the identification page
+
+\def\partners#1{\gdef\proj@partners{#1}}
+\def\webAddress#1{\gdef\proj@web{#1}}
+\def\principalContact#1{\gdef\proj@contact{#1}}
+\def\logo#1{\gdef\proj@logo{#1}}
+
+
+\endinput
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "template.tex"
+%%% End: 
